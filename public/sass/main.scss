@@ -1,0 +1,62 @@
+*,body{
+    font-family: 'Courier New', Courier, monospace !important;
+}
+
+$bg-color-input: #d3d3d3;
+
+@mixin df-center($f-direction) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: $f-direction;
+}
+
+input{
+    border-radius: 20px;
+    border: 1px solid grey;
+    transition: all 200ms ease-in-out;
+
+    &:hover{
+        background-color: $bg-color-input;
+    }
+}
+.container {
+
+    @include df-center(column);
+    
+    width: max-content;
+    margin:  20vh auto 0 auto;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background-color: #fefefe;
+
+    fieldset{
+        width: max-content;
+        border-radius: 10px;
+        border: 1px solid #d8d8d8;
+        legend{
+            font-family: 'Courier New', Courier, monospace;
+        }
+        form{
+            padding-top: 20px;
+            background-color: #fefefe;
+            button{
+                border: 1px solid #d8d8d8;
+                border-radius: 10px;
+                cursor: pointer;
+                padding: 5px 20px;
+                margin-left: 10px;
+                display: block;
+                width: max-content;
+                margin: 20px auto 0 auto;
+                transition: 200ms ease-in-out;
+
+                &:hover{
+                    background-color: #4169e1;
+                    transform: scale(1.1);
+                    border: 1px solid #000;
+                }
+            }
+
+        }
+    }
+}
