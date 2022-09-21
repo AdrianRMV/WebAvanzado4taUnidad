@@ -1,6 +1,9 @@
 *,body{
     font-family: 'Courier New', Courier, monospace !important;
 }
+body{
+    background-color: #d3d3d3 !important;
+}
 
 $bg-color-input: #d3d3d3;
 
@@ -24,7 +27,6 @@ input{
 
     @include df-center(column);
     
-    width: max-content;
     margin:  20vh auto 0 auto;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     background-color: #fefefe;
