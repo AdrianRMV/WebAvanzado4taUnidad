@@ -6,6 +6,10 @@ body {
   background-color: #d3d3d3 !important;
 }
 
+a {
+  color: #fff;
+}
+
 input {
   border-radius: 20px;
   border: 1px solid grey;
