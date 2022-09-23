@@ -11,9 +11,12 @@
 
 <body>
 
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">
+                <img src="/public/imgs/shop.png" alt="Bootstrap" width="35" height="35">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -42,17 +45,15 @@
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>
 
-    <div class="container-fluid">
+    <!-- Main content -->
+    <main class="container-fluid">
         <div class="row">
-            <div class="col-md-2 px-sm-2 px-0 bg-dark d-sm-block d-none">
+            <!-- Sidebar -->
+            <aside class="col-md-2 px-sm-2 px-0 bg-light d-sm-block d-none">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li class="nav-item">
@@ -128,14 +129,128 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </aside>
+
+            <!-- Cards -->
+
             <div class="col py-3">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime et quidem eligendi deleniti dolorem odio molestias nisi aspernatur eveniet consectetur fugiat maiores excepturi animi accusamus, vel non delectus dolores tempora!</p>
+                <section>
+                    <div class="row p-5">
+                        <div class="col">Products</div>
+                        <div class="col">
+                            <button class="btn btn-primary">Añadir</button>
+                        </div>
+                    </div>
+
+                    <!-- Cards-->
+                    <div class="row">
+
+                        <?php for ($i = 0; $i < 12; $i++) : ?>
+                            <div class="col-md-4 col-sm-12 mb-5">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/public/imgs/huevo.jpg" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+                                        <div class="buttons-card">
+
+                                            <div class="row">
+                                                <!-- Editar Button -->
+                                                <div class="col-6 w-50">
+                                                    <button type="button" class="btn btn-warning w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        Editar
+                                                    </button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <form action="">
+                                                                    <div class="modal-body">
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">@</span>
+                                                                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                                                        </div>
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">@</span>
+                                                                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                                                        </div>
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">@</span>
+                                                                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                                                        </div>
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">@</span>
+                                                                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Eliminar -->
+                                                <div class="col-6 w-50">
+                                                    <!-- Aceptar Button -->
+                                                    <button type="button" class="btn btn-danger  w-100" id="delete-button">
+                                                        Eliminar
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <a href="" class="btn btn-primary text-center w-100 mt-2">Detalle</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endfor; ?>
+                    </div>
+                </section>
             </div>
         </div>
-    </div>
-    
+    </main>
 
+    <!-- Sweet alert  -->
+    <script type="text/javascript">
+        const deleteButton = document.getElementById('delete-button');
+
+        deleteButton.addEventListener('click', () => {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                }
+            })
+        })
+    </script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 
