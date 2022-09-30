@@ -28,7 +28,7 @@
                         class="col-md-5 p-20 d-flex align-items-center justify-content-center"
                     >
                     
-                    <form action="./products/index.php">
+                    <form method="post" action="app/AuthController.php">
                             <h1 class="text-center">Login</h1>
                             <br><br>
                             <div class="mb-3">
@@ -42,6 +42,8 @@
                                     class="form-control"
                                     id="exampleInputEmail1"
                                     aria-describedby="emailHelp"
+                                    name="email"
+                                    required
                                 />
                                 <div id="emailHelp" class="form-text">
                                     We'll never share your email with anyone
@@ -58,6 +60,8 @@
                                     type="password"
                                     class="form-control"
                                     id="exampleInputPassword1"
+                                    name="password"
+                                    required
                                 />
                             </div>
                             <div class="mb-3 form-check">
@@ -72,9 +76,12 @@
                                     >Check me out</label
                                 >
                             </div>
-                            <button type="submit" class="btn btn-primary">
-                                Submit
+                            <button type="submit" class="btn btn-success">
+                                Entrar
                             </button>
+                            <input type="hidden" name="action" value="access">
+
+
                         </form>
                     </div>
                 </div>

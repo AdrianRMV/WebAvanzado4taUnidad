@@ -88,12 +88,6 @@
                                                 </button>
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <a href="" class="btn btn-primary text-center w-100 mt-2">Detalle</a>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

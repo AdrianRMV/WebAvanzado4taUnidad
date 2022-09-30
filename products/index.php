@@ -1,3 +1,9 @@
+<?php
+include "../app/ProductsController.php";
+$productController = new ProductsController();
+$products = $productController->getProducts();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -27,13 +33,14 @@
                     <!-- Cards-->
                     <div class="row">
 
-                        <?php for ($i = 0; $i < 12; $i++) : ?>
+                        <?php if(isset($products) && count($products)) : ?>
+                        <?php foreach ($products as $product) : ?>
                             <div class="col-md-4 col-sm-12 mb-5">
                                 <div class="card" style="width: 18rem;">
-                                    <img src="/public/imgs/huevo.jpg" class="card-img-top" alt="...">
+                                    <img src="<?= $product->cover ?>" class="card-img-top" alt="..." />
                                     <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <h5 class="card-title"><?= $product->name ?></h5>
+                                        <p class="card-text"><?= $product->description ?></p>
 
                                         <div class="buttons-card">
 
@@ -92,14 +99,15 @@
 
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <a href="" class="btn btn-primary text-center w-100 mt-2">Detalle</a>
+                                                    <a href="details.php" class="btn btn-primary text-center w-100 mt-2">Detalle</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        <?php endfor; ?>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
                 </section>
             </div>
