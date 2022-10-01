@@ -2,8 +2,7 @@
 session_start();
 class ProductsController
 {
-    public function getProducts()
-    {
+    public function getProducts(){
 
         $curl = curl_init();
 
@@ -33,5 +32,8 @@ class ProductsController
             return array();
             
         }
+    }
+    public function setProducts(){
+
     }
 }
