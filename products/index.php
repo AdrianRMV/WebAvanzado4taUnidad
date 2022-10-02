@@ -78,7 +78,13 @@ if (isset($_POST['add_product'])) {
                                                 <input type="hidden" name="brand_id" value="1">
 
                                                 <div class="input-group mb-3">
-                                                    <input type="file" class="form-control" id="inputGroupFile02" name="imagen">
+                                                    <div class="drop-area">
+                                                        <h2>Arrastra y suelta imágenes</h2>
+                                                        <span>o</span>
+                                                        <button>Selecciona tus archivos</button>
+                                                        <input type="file" name="" id="input-file" hidden>
+                                                    </div>
+                                                    <div id="preview"></div>
                                                 </div>
 
                                             </div>
