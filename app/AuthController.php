@@ -8,7 +8,7 @@ if (isset($_POST["action"])) {
             $password = strip_tags($_POST["password"]);
 
             $authController = new AuthController();
-            $authController->login($email, $password);
+            $authController -> login($email, $password);
             break;
     }
 } else {
@@ -51,7 +51,7 @@ class AuthController
             $_SESSION['token'] = $response->data->token;
             header("Location:../products?success");
         } else {
-            // header("Location:../?error");
+            header("Location:../?error");
             $error = "Usuario o contraseña incorrectas";
         }
     }

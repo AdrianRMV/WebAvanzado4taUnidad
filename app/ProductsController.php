@@ -2,7 +2,8 @@
 session_start();
 class ProductsController
 {
-    public function getProducts(){
+    public function getProducts()
+    {
 
         $curl = curl_init();
 
@@ -25,15 +26,10 @@ class ProductsController
 
         if (isset($response->code) && $response->code > 0) {
 
-            return $response -> data;
-
+            return $response->data;
         } else {
 
             return array();
-            
         }
-    }
-    public function setProducts(){
-
     }
 }
