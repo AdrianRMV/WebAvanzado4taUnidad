@@ -80,8 +80,8 @@ if (isset($_POST['add_product'])) {
                                                 <div class="drop-area">
                                                     <h2>Arrastra y suelta imágenes</h2>
                                                     <span>o</span>
-                                                    <button>Selecciona tus archivos</button>
-                                                    <input type="file" name="" id="input-file" hidden>
+                                                    <div class="button-files">Selecciona tus archivos</div>
+                                                    <input type="file" id="input-file" hidden>
                                                 </div>
                                                 <div id="preview"></div>
 

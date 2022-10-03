@@ -40,16 +40,18 @@ body {
     color: #000;
 }
 
-.drop-area button {
-    padding: 10px 25px;
-    font-size: 20px;
-    border: 0;
-    outline: none;
-    background-color: #5256ad;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 20px;
+.drop-area {
+    .button-files {
+        padding: 10px 25px;
+        font-size: 20px;
+        border: 0;
+        outline: none;
+        background-color: #5256ad;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 20px;
+    }
 }
 
 .file-container {
