@@ -14,8 +14,31 @@ if (isset($_POST['add_product'])) {
 
         // Movemos la imagen del directorio temporal al directorio escogido
         move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_destino . $nombre_imagen);
-    } else {
 
+        // Post to api
+        // TODO: Traer info de los inputs (name, description, slug, etc)
+
+        // $curl = curl_init();
+
+        // curl_setopt_array($curl, array(
+        //     CURLOPT_URL => 'https://crud.jonathansoto.mx/api/products',
+        //     CURLOPT_RETURNTRANSFER => true,
+        //     CURLOPT_ENCODING => '',
+        //     CURLOPT_MAXREDIRS => 10,
+        //     CURLOPT_TIMEOUT => 0,
+        //     CURLOPT_FOLLOWLOCATION => true,
+        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //     CURLOPT_CUSTOMREQUEST => 'POST',
+        //     CURLOPT_POSTFIELDS => array('name' => , 'slug' => , 'description' => , 'brand_id' => , 'cover' => new CURLFILE('/C:/Users/jsoto/Downloads/00750101111561L.webp')),
+        //     CURLOPT_HTTPHEADER => array(
+        //         'Authorization: Bearer 14|8kQkzPpdIC0zEf8bhYvvFtOoPBSU0t7ZSasxqa7j'
+        //     ),
+        // ));
+
+        // $response = curl_exec($curl);
+
+        // curl_close($curl);
+    } else {
     }
 }
 
