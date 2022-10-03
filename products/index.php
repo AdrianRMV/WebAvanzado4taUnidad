@@ -9,10 +9,10 @@ if (isset($_POST['add_product'])) {
     $tamanio_imagen = $_FILES['imagen']['size'];
 
     // Ruta de destino en el servidor
-    $carpeta_destino = $_SERVER['DOCUMENT_ROOT'].'/public/imgs/';
+    $carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/public/imgs/';
 
     // Movemos la imagen del directorio temporal al directorio escogido
-    move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_destino.$nombre_imagen);
+    move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_destino . $nombre_imagen);
 }
 
 ?>
@@ -77,15 +77,13 @@ if (isset($_POST['add_product'])) {
                                                 <!-- Brand id por defecto siempre sera tendra el valor de 1 -->
                                                 <input type="hidden" name="brand_id" value="1">
 
-                                                <div class="input-group mb-3">
-                                                    <div class="drop-area">
-                                                        <h2>Arrastra y suelta imágenes</h2>
-                                                        <span>o</span>
-                                                        <button>Selecciona tus archivos</button>
-                                                        <input type="file" name="" id="input-file" hidden>
-                                                    </div>
-                                                    <div id="preview"></div>
+                                                <div class="drop-area">
+                                                    <h2>Arrastra y suelta imágenes</h2>
+                                                    <span>o</span>
+                                                    <button>Selecciona tus archivos</button>
+                                                    <input type="file" name="" id="input-file" hidden>
                                                 </div>
+                                                <div id="preview"></div>
 
                                             </div>
 

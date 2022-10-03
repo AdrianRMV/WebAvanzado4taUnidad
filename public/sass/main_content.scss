@@ -13,34 +13,34 @@ body {
     box-sizing: border-box;
 }
 
-.drag-area {
-    border: 5px dashed #ddd;
-    height: 300px;
-    width: 100%;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+.drop-area {
+    border: 5px dashed #ddd !important;
+    height: 300px !important;
+    width: 100% !important;
+    border-radius: 5px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
 }
 
-.drag-area.active {
-    background-color: #b8d3fe;
-    color: #000;
-    border: 2px dashed #618ac9;
+.drop-area.active {
+    background-color: #b8d3fe !important;
+    color: #000 !important;
+    border: 2px dashed #618ac9 !important;
 }
 
-.drag-area h2 {
+.drop-area h2 {
     font-size: 30px;
     font-weight: 500;
 }
 
-.drag-area span {
+.drop-area span {
     font-size: 25px;
     color: #000;
 }
 
-.drag-area button {
+.drop-area button {
     padding: 10px 25px;
     font-size: 20px;
     border: 0;
