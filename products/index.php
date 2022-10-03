@@ -4,15 +4,19 @@ $productController = new ProductsController();
 $products = $productController->getProducts();
 
 if (isset($_POST['add_product'])) {
-    $nombre_imagen = $_FILES['imagen']['name'];
-    $tipo_imagen = $_FILES['imagen']['type'];
-    $tamanio_imagen = $_FILES['imagen']['size'];
+    if (isset($_FILES['imagen']['name']) && isset($_FILES['imagen']['type']) && isset($_FILES['imagen']['size'])) {
+        $nombre_imagen = $_FILES['imagen']['name'];
+        $tipo_imagen = $_FILES['imagen']['type'];
+        $tamanio_imagen = $_FILES['imagen']['size'];
 
-    // Ruta de destino en el servidor
-    $carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/public/imgs/';
+        // Ruta de destino en el servidor
+        $carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/public/javascript/images/';
 
-    // Movemos la imagen del directorio temporal al directorio escogido
-    move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_destino . $nombre_imagen);
+        // Movemos la imagen del directorio temporal al directorio escogido
+        move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_destino . $nombre_imagen);
+    } else {
+
+    }
 }
 
 ?>
@@ -44,7 +48,7 @@ if (isset($_POST['add_product'])) {
                             <!-- <button class="btn btn-primary">Añadir</button> -->
                             <span style="padding-right: 10px;">Añadir nuevo producto</span>
 
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AñadirModal">
+                            <button id="buton_agregar_modal" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AñadirModal">
                                 Añadir
                             </button>
 
@@ -81,7 +85,7 @@ if (isset($_POST['add_product'])) {
                                                     <h2>Arrastra y suelta imágenes</h2>
                                                     <span>o</span>
                                                     <div class="button-files">Selecciona tus archivos</div>
-                                                    <input type="file" id="input-file" hidden>
+                                                    <input type="file" id="input-file" hidden name="imagen">
                                                 </div>
                                                 <div id="preview"></div>
 
@@ -209,6 +213,8 @@ if (isset($_POST['add_product'])) {
             })
         })
     </script>
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
     <?php include '../layouts/scripts.template.php' ?>
