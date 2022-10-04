@@ -201,7 +201,8 @@ if (isset($_POST['add_product'])) {
 
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <a href="details.php" class="btn btn-primary text-center w-100 mt-2">Detalle</a>
+                                                        <a href="details/product_<?=$product->slug?>" class="btn btn-primary text-center w-100 mt-2">Detalle</a>
+                                                        <!-- <a href="details/" class="btn btn-primary text-center w-100 mt-2">Detalle</a> -->
                                                     </div>
                                                 </div>
                                             </div>
