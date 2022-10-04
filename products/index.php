@@ -17,27 +17,31 @@ if (isset($_POST['add_product'])) {
 
         // Post to api
         // TODO: Traer info de los inputs (name, description, slug, etc)
+        $nombre_producto = $_POST['product_name'];
+        $descripcion_producto = $_POST['product_description'];
+        $features_producto = $_POST['product_features'];
+        $slug_producto = $_POST['product_slug'];
+        $brand_id = $_POST['brand_id'];
 
-        // $curl = curl_init();
+        $curl = curl_init();
 
-        // curl_setopt_array($curl, array(
-        //     CURLOPT_URL => 'https://crud.jonathansoto.mx/api/products',
-        //     CURLOPT_RETURNTRANSFER => true,
-        //     CURLOPT_ENCODING => '',
-        //     CURLOPT_MAXREDIRS => 10,
-        //     CURLOPT_TIMEOUT => 0,
-        //     CURLOPT_FOLLOWLOCATION => true,
-        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        //     CURLOPT_CUSTOMREQUEST => 'POST',
-        //     CURLOPT_POSTFIELDS => array('name' => , 'slug' => , 'description' => , 'brand_id' => , 'cover' => new CURLFILE('/C:/Users/jsoto/Downloads/00750101111561L.webp')),
-        //     CURLOPT_HTTPHEADER => array(
-        //         'Authorization: Bearer 14|8kQkzPpdIC0zEf8bhYvvFtOoPBSU0t7ZSasxqa7j'
-        //     ),
-        // ));
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://crud.jonathansoto.mx/api/products',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array('name' => $nombre_producto, 'slug' => $slug_producto, 'description' => $descripcion_producto, 'brand_id' => $brand_id, 'cover' => new CURLFILE($carpeta_destino . $nombre_imagen)),
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer ' . $_SESSION['token']
+            ),
+        ));
 
-        // $response = curl_exec($curl);
-
-        // curl_close($curl);
+        $response = curl_exec($curl);
+        curl_close($curl);
     } else {
     }
 }
@@ -99,7 +103,7 @@ if (isset($_POST['add_product'])) {
                                                 </div>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">Slug</span>
-                                                    <input name="product_slug" type="text" class="form-control" placeholder="product-name/number/brand-of-the-product">
+                                                    <input name="product_slug" type="text" class="form-control" placeholder="product-name-simple_description">
                                                 </div>
                                                 <!-- Brand id por defecto siempre sera tendra el valor de 1 -->
                                                 <input type="hidden" name="brand_id" value="1">
