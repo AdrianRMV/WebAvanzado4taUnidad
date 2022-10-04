@@ -1,0 +1,3 @@
+Options +FollowSymLinks
+RewriteEngine on
+RewriteRule ^details/(a-z A-Z 0-9)$ details.php?producto_slug=$1
