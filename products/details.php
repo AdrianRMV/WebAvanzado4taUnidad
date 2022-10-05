@@ -13,7 +13,6 @@ $productBySlug = $productController->getProductBySlug($product_slug);
 <html lang="es">
 
 <?php include '../layouts/head.template.php' ?>
-
 <body>
 
     <?php include '../layouts/nav.template.php' ?>
@@ -25,19 +24,18 @@ $productBySlug = $productController->getProductBySlug($product_slug);
             <?php include '../layouts/sidebar.template.php' ?>
 
             <!-- Cards -->
-            <div class="col py-3">
+            <div class="col py-3 px-5 mb-4">
                 <section>
-
                     <!-- Cards-->
                     <div class="row">
-                        <!-- Pregunta si existe la variable de products y si esta contiene algo -->
+                        <!-- Pregunta si existe la variable de products -->
                         <?php if (isset($productBySlug)) : ?>
                             <?php foreach ($productBySlug as $product) : ?>
-                                <div class="row">
-                                    <div class="col-5">
+                                <div class="row product_by_slug">
+                                    <div class="col-3">
                                         <img src="<?= $product->cover ?>" class="card-img-top" alt="..." />
                                     </div>
-                                    <div class="col-7">
+                                    <div class="col text-product-slug">
                                         <div class="row">
                                             <div class="col">
                                                 <h5 class="card-title"><?= $product->name ?></h5>
@@ -56,6 +54,61 @@ $productBySlug = $productController->getProductBySlug($product_slug);
                                         <div class="row">
                                             <div class="col">
                                                 <p class="card-text">Features: <?= $product->features ?></p>
+                                            </div>
+                                        </div>
+                                        <div class="buttons-card">
+
+                                            <div class="row">
+                                                <!-- Editar Button -->
+                                                <div class="col-6 w-50">
+                                                    <button type="button" class="btn btn-warning w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                        Editar
+                                                    </button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <form action="">
+                                                                    <div class="modal-body">
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">@</span>
+                                                                            <input type="text" class="form-control" placeholder="Username">
+                                                                        </div>
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">@</span>
+                                                                            <input type="text" class="form-control" placeholder="Username">
+                                                                        </div>
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">@</span>
+                                                                            <input type="text" class="form-control" placeholder="Username">
+                                                                        </div>
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">@</span>
+                                                                            <input type="text" class="form-control" placeholder="Username">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Eliminar -->
+                                                <div class="col-6 w-50">
+                                                    <!-- Aceptar Button -->
+                                                    <button type="button" class="btn btn-danger  w-100" id="delete-button">
+                                                        Eliminar
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
