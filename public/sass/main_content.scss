@@ -78,6 +78,17 @@ body {
     color: #ff0000;
 }
 
-.hidden{
-    display: none !important; 
+.hidden {
+    display: none !important;
+}
+
+.product_by_slug {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    align-items: center;
+    .text-product-slug {
+        padding: 20px 0;
+        .row {
+            padding: 5px 0px !important;
+        }
+    }
 }
