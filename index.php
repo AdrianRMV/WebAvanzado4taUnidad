@@ -1,5 +1,5 @@
 <?php 
-    include './app/config.php'
+    include '/app/config.php'
 ?>
 
 <!DOCTYPE html>
@@ -84,7 +84,7 @@
                                 Entrar
                             </button>
                             <input type="hidden" name="action" value="access">
-
+                            <input type="hidden" id="super_token" value="<?= $_SESSION['super_token'] ?>">
 
                         </form>
                     </div>

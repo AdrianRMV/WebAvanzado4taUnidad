@@ -142,13 +142,13 @@ function deleteProduct(id) {
         confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
         if (result.isConfirmed) {
-            let super_token = document.getElementById('super_token').value;
             let base_path = document.getElementById('base_p').value;
+            let super_token = document.getElementById('super_token').value;
 
             let formData = new FormData();
             formData.append('id', id);
             formData.append('action', 'delete');
-            formData.append('sp_token', super_token);
+            formData.append('sp_token_axios', super_token);
 
             axios
                 .post(base_path+'app/ProductsController.php', formData)
@@ -161,7 +161,7 @@ function deleteProduct(id) {
                         );
                         location.href = `${base_path}products`;
                     } else {
-                        swal('Error', {
+                        Swal('Error', {
                             icon: 'error',
                         });
                     }

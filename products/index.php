@@ -100,6 +100,7 @@ $brands = $BrandsController->getBrands();
 
                                         <input type="hidden" id="action" name="action" value="create">
                                         <input type="hidden" name="id" id="id_product">
+                                        <input type="hidden" name="super_token" value="<?= $_SESSION['super_token']?>">
                                     </div>
                                 </form>
                             </div>

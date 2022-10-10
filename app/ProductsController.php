@@ -3,55 +3,59 @@
 include_once "config.php";
 
 if (isset($_POST["action"])) {
-    switch ($_POST['action']) {
-        case 'create':
-            if (isset($_FILES['imagen']['name']) && isset($_FILES['imagen']['type']) && isset($_FILES['imagen']['size'])) {
-                $nombre_imagen = $_FILES['imagen']['name'];
-                $tipo_imagen = $_FILES['imagen']['type'];
-                $tamanio_imagen = $_FILES['imagen']['size'];
+    if (
+        isset($_POST['super_token']) || isset($_POST['sp_token_axios'])
+    ) {
+        switch ($_POST['action']) {
+            case 'create':
+                if (isset($_FILES['imagen']['name']) && isset($_FILES['imagen']['type']) && isset($_FILES['imagen']['size'])) {
+                    $nombre_imagen = $_FILES['imagen']['name'];
+                    $tipo_imagen = $_FILES['imagen']['type'];
+                    $tamanio_imagen = $_FILES['imagen']['size'];
 
-                // Ruta de destino en el servidor
-                $carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/public/javascript/images/';
+                    // Ruta de destino en el servidor
+                    $carpeta_destino = $_SERVER['DOCUMENT_ROOT'] . '/public/javascript/images/';
 
-                // Movemos la imagen del directorio temporal al directorio escogido
-                move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_destino . $nombre_imagen);
+                    // Movemos la imagen del directorio temporal al directorio escogido
+                    move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_destino . $nombre_imagen);
 
+                    $nombre_producto = strip_tags($_POST['product_name']);
+                    $descripcion_producto = strip_tags($_POST['product_description']);
+                    $features_producto = strip_tags($_POST['product_features']);
+                    $slug_producto = strip_tags($_POST['product_slug']);
+                    $slug_producto = preg_replace('/[^A-Za-z0-9-]+/', '-', $name);
+                    $slug_producto = strtolower($slug_producto);
+
+                    $brand_id = strip_tags($_POST['brand_id']);
+                    $productsController = new ProductsController();
+                    $productsController->createProduct($nombre_producto, $descripcion_producto, $features_producto, $slug_producto, $brand_id, $carpeta_destino, $nombre_imagen);
+                }
+
+                break;
+
+            case 'update':
                 $nombre_producto = strip_tags($_POST['product_name']);
                 $descripcion_producto = strip_tags($_POST['product_description']);
-                $features_producto = strip_tags($_POST['product_features']);
                 $slug_producto = strip_tags($_POST['product_slug']);
-                $slug_producto = preg_replace('/[^A-Za-z0-9-]+/', '-', $name);
-                $slug_producto = strtolower($slug_producto);
-
+                $features_producto = strip_tags($_POST['product_features']);
                 $brand_id = strip_tags($_POST['brand_id']);
+                $id = strip_tags($_POST['id']);
+
+                $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', $name);
+                $slug = strtolower($slug);
+
                 $productsController = new ProductsController();
-                $productsController->createProduct($nombre_producto, $descripcion_producto, $features_producto, $slug_producto, $brand_id, $carpeta_destino, $nombre_imagen);
-            }
+                $productsController->updateProduct($name, $slug, $description, $features, $brand_id, $id);
 
-            break;
+                break;
 
-        case 'update':
-            $nombre_producto = strip_tags($_POST['product_name']);
-            $descripcion_producto = strip_tags($_POST['product_description']);
-            $slug_producto = strip_tags($_POST['product_slug']);
-            $features_producto = strip_tags($_POST['product_features']);
-            $brand_id = strip_tags($_POST['brand_id']);
-            $id = strip_tags($_POST['id']);
+            case 'delete':
+                $id = strip_tags($_POST['id']);
+                $productsController = new ProductsController();
+                echo json_encode($productsController->deleteProductById($id));
 
-            $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', $name);
-            $slug = strtolower($slug);
-
-            $productsController = new ProductsController();
-            $productsController->updateProduct($name, $slug, $description, $features, $brand_id, $id);
-
-            break;
-
-        case 'delete':
-            $id = strip_tags($_POST['id']);
-            $productsController = new ProductsController();
-            echo json_encode($productsController->deleteProductById($id));
-
-            break;
+                break;
+        }
     }
 }
 
