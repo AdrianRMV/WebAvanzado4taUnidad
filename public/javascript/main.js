@@ -4,6 +4,25 @@ const dragText = dropArea.querySelector('h2');
 const button = dropArea.querySelector('.button-files');
 const input = dropArea.querySelector('#input-file');
 const buttonIndex = document.querySelector('#buton_agregar_modal');
+
+// Modal
+const inputsForm = document.querySelectorAll('.form-control');
+
+$('#btn-editar').click(() => {
+    dropArea.classList.add('hidden');
+});
+
+$('.btn_open_modal').click(() => {
+    if (dropArea.classList.contains('hidden')) {
+        dropArea.classList.remove('hidden');
+    }
+    for (i = 0; i < inputsForm.length; i++) {
+        if (inputsForm[i].value != '') {
+            inputsForm[i].value = '';
+        }
+    }
+});
+
 let files;
 
 button.addEventListener('click', (e) => {
@@ -123,12 +142,16 @@ function deleteProduct(id) {
         confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
         if (result.isConfirmed) {
+            let super_token = document.getElementById('super_token').value;
+            let base_path = document.getElementById('base_p').value;
+
             let formData = new FormData();
             formData.append('id', id);
             formData.append('action', 'delete');
+            formData.append('sp_token', super_token);
 
             axios
-                .post('../../app/ProductsController.php', formData)
+                .post(base_path+'app/ProductsController.php', formData)
                 .then((resp) => {
                     if (resp.data) {
                         Swal.fire(
@@ -136,6 +159,7 @@ function deleteProduct(id) {
                             'Your product has been deleted.',
                             'success'
                         );
+                        location.href = `${base_path}products`;
                     } else {
                         swal('Error', {
                             icon: 'error',
@@ -148,9 +172,8 @@ function deleteProduct(id) {
 }
 
 function updateProduct(target) {
-
     let product = JSON.parse(target.dataset.product);
-    
+
     $('#i_name').val(product.name);
     $('#i_slug').val(product.slug);
     $('#i_desc').val(product.description);

@@ -1,9 +1,13 @@
 <?php
 include "../app/config.php";
+include("../app/BrandsController.php");
 include "../app/ProductsController.php";
 
 $productController = new ProductsController();
 $products = $productController->getProducts();
+
+$BrandsController = new BrandsController();
+$brands = $BrandsController->getBrands();
 
 ?>
 
@@ -34,60 +38,70 @@ $products = $productController->getProducts();
                             <!-- <button class="btn btn-primary">Añadir</button> -->
                             <span style="padding-right: 10px;">Añadir nuevo producto</span>
 
-                            <button id="buton_agregar_modal" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AñadirModal">
+                            <button id="buton_agregar_modal" type="button" class="btn btn-primary btn_open_modal" data-bs-toggle="modal" data-bs-target="#AñadirModal">
                                 Añadir
                             </button>
+                        </div>
+                    </div>
 
-                            <!-- Modal para añadir producto -->
-                            <div class="modal fade" id="AñadirModal" tabindex="-1" aria-labelledby="AñadirModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="AñadirModalLabel">Añadir producto</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!-- Modal para añadir producto -->
+                    <div class="modal fade" id="AñadirModal" tabindex="-1" aria-labelledby="AñadirModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="AñadirModalLabel">Añadir producto</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <!-- FORM -->
+                                <form enctype="multipart/form-data" method="post" action="../app/ProductsController.php">
+                                    <div class="modal-body">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Product name</span>
+                                            <input id="i_name" name="product_name" type="text" class="form-control">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Description</span>
+                                            <input id="i_desc" name="product_description" type="text" class="form-control">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Features</span>
+                                            <input id="i_features" name="product_features" type="text" class="form-control">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Brands</span>
+                                            <select id="brand_id" name="brand_id" required class="form-control">
+                                                <?php foreach ($brands as $brand) : ?>
+                                                    <option value="<?= $brand->id ?>"><?= $brand->name ?></option>
+                                                <?PHP endforeach; ?>
+                                            </select>
                                         </div>
 
-                                        <!-- FORM -->
-                                        <form enctype="multipart/form-data" method="post" action="../app/ProductsController.php">
-                                            <div class="modal-body">
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1">Product name</span>
-                                                    <input id="i_name" name="product_name" type="text" class="form-control">
-                                                </div>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1">Description</span>
-                                                    <input id="i_desc" name="product_description" type="text" class="form-control">
-                                                </div>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1">Features</span>
-                                                    <input id="i_features" name="product_features" type="text" class="form-control">
-                                                </div>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1">Slug</span>
-                                                    <input id="i_slug" name="product_slug" type="text" class="form-control" placeholder="product-name-simple_description">
-                                                </div>
-                                                <!-- Brand id por defecto siempre sera tendra el valor de 1 -->
-                                                <input id="i_brandId" type="hidden" name="brand_id" value="1">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Slug</span>
+                                            <input id="i_slug" name="product_slug" type="text" class="form-control" placeholder="product-name-simple_description">
+                                        </div>
+                                        <!-- Brand id por defecto siempre sera tendra el valor de 1 -->
+                                        <input id="i_brandId" type="hidden" name="brand_id" value="1">
 
-                                                <div class="drop-area">
-                                                    <h2>Arrastra y suelta imágenes</h2>
-                                                    <span>o</span>
-                                                    <div class="button-files">Selecciona tus archivos</div>
-                                                    <input type="file" id="input-file" hidden name="imagen">
-                                                </div>
-                                                <div id="preview"></div>
+                                        <div class="drop-area">
+                                            <h2>Arrastra y suelta imágenes</h2>
+                                            <span>o</span>
+                                            <div class="button-files">Selecciona tus archivos</div>
+                                            <input type="file" id="input-file" hidden name="imagen">
+                                        </div>
+                                        <div id="preview"></div>
 
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                <button type="sumbit" class="btn btn-primary add_product_button" data-bs-dismiss="modal" name="add_product">Aceptar</button>
-                                                <input type="hidden" id="action" name="action" value="create">
-                                                <input type="hidden" id="id_product" name="id">
-                                            </div>
-                                        </form>
                                     </div>
-                                </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="sumbit" class="btn btn-primary add_product_button" data-bs-dismiss="modal" name="add_product">Aceptar</button>
+
+                                        <input type="hidden" id="action" name="action" value="create">
+                                        <input type="hidden" name="id" id="id_product">
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -109,7 +123,7 @@ $products = $productController->getProducts();
                                                 <div class="row">
                                                     <!-- Editar Button -->
                                                     <div class="col-6 w-50">
-                                                        <button id="btn-editar" data-product='<?=json_encode($product)?>' onclick="updateProduct(this)" type="button" class="btn btn-warning w-100" data-bs-toggle="modal" data-bs-target="#AñadirModal">
+                                                        <button id="btn-editar" data-product='<?= json_encode($product) ?>' onclick="updateProduct(this)" type="button" class="btn btn-warning w-100" data-bs-toggle="modal" data-bs-target="#AñadirModal">
                                                             Editar
                                                         </button>
                                                     </div>
@@ -121,6 +135,12 @@ $products = $productController->getProducts();
                                                         </button>
                                                     </div>
                                                 </div>
+
+                                                <!-- Super token creado en inicio de sesion -->
+                                                <input type="hidden" id="super_token" value="<?= $_SESSION['super_token'] ?>">
+                                                <!-- BasePath para poder mandar la ruta absoluta por axios -->
+                                                <input type="hidden" id="base_p" value="<?= BASE_PATH ?>">
+
 
                                                 <div class="row">
                                                     <div class="col-12">

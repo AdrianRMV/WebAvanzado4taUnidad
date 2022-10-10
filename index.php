@@ -1,3 +1,7 @@
+<?php 
+    include './app/config.php'
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
