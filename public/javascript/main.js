@@ -1,3 +1,4 @@
+// Drag and drop (CREAR PRODUCTO)
 const dropArea = document.querySelector('.drop-area');
 const dragText = dropArea.querySelector('h2');
 const button = dropArea.querySelector('.button-files');
@@ -6,8 +7,8 @@ const buttonIndex = document.querySelector('#buton_agregar_modal');
 let files;
 
 button.addEventListener('click', (e) => {
-    if(dropArea.classList.contains('hidden')){
-        dropArea.classList.remove('hidden')
+    if (dropArea.classList.contains('hidden')) {
+        dropArea.classList.remove('hidden');
     }
 });
 button.addEventListener('click', (e) => {
@@ -32,12 +33,13 @@ dropArea.addEventListener('dragleave', (e) => {
     dropArea.classList.remove('active');
     dragText.textContent = 'Arrasta y suelta una imagen';
 });
+
 dropArea.addEventListener('drop', (e) => {
     e.preventDefault();
     files = e.dataTransfer.files;
     showFile(files);
     dropArea.classList.remove('active');
-    dropArea.classList.add('hidden')
+    dropArea.classList.add('hidden');
 });
 
 function showFile(file) {
@@ -99,9 +101,61 @@ async function uploadFile(file) {
         // console.log(file)
         const responseText = await response.text();
         console.log(responseText);
-        document.querySelector('.status-text').innerHTML = `<span class="success">Archivo subido correctamente...</span>`;
+        document.querySelector(
+            '.status-text'
+        ).innerHTML = `<span class="success">Archivo subido correctamente...</span>`;
     } catch (error) {
         console.log(error);
-        document.querySelector('.status-text').innerHTML = `<span class="failure">No se pudo subir...</span>`;
+        document.querySelector(
+            '.status-text'
+        ).innerHTML = `<span class="failure">No se pudo subir...</span>`;
     }
+}
+
+function deleteProduct(id) {
+    Swal.fire({
+        title: 'Are you sure u want to delete this product?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let formData = new FormData();
+            formData.append('id', id);
+            formData.append('action', 'delete');
+
+            axios
+                .post('../../app/ProductsController.php', formData)
+                .then((resp) => {
+                    if (resp.data) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your product has been deleted.',
+                            'success'
+                        );
+                    } else {
+                        swal('Error', {
+                            icon: 'error',
+                        });
+                    }
+                })
+                .catch((error) => console.log(error));
+        }
+    });
+}
+
+function updateProduct(target) {
+
+    let product = JSON.parse(target.dataset.product);
+    
+    $('#i_name').val(product.name);
+    $('#i_slug').val(product.slug);
+    $('#i_desc').val(product.description);
+    $('#i_features').val(product.features);
+    $('#i_brandId').val(product.brand_id);
+    $('#id_product').val(product.id);
+    $('#action').val('update');
 }
